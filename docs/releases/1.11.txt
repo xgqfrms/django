@@ -42,6 +42,15 @@ be able run your package's tests using ``python -Wd`` so that deprecation
 warnings do appear. After making the deprecation warning fixes, your app should
 be compatible with Django 2.0.
 
+Template-based widget rendering
+-------------------------------
+
+To ease customizing widgets, form widget rendering is now done using the
+template system rather than in Python. See :doc:`/ref/forms/renderers`.
+
+You may need to adjust any custom widgets that you've written for a few
+:ref:`backwards incompatible changes <template-widget-incompatibilities-1-11>`.
+
 .. _whats-new-1.11:
 
 What's new in Django 1.11
@@ -303,6 +312,21 @@ to assign a free port. The ``DJANGO_LIVE_TEST_SERVER_ADDRESS`` environment
 variable is no longer used, and as it's also no longer used, the
 ``manage.py test --liveserver`` option is removed.
 
+.. _template-widget-incompatibilities-1-11:
+
+Changes due to the introduction of template-based widget rendering
+------------------------------------------------------------------
+
+Some undocumented classes in ``django.forms.widgets`` are removed:
+
+* ``SubWidget``
+* ``RendererMixin``, ``ChoiceFieldRenderer``, ``RadioFieldRenderer``,
+  ``CheckboxFieldRenderer``
+* ``ChoiceInput``, ``RadioChoiceInput``, ``CheckboxChoiceInput``
+
+The ``Widget.format_output()`` method is removed. Use a custom widget template
+instead.
+
 Miscellaneous
 -------------
 
@@ -354,3 +378,7 @@ Miscellaneous
   deprecated in favor of new class-based views
   :class:`~django.contrib.auth.views.LoginView` and
   :class:`~django.contrib.auth.views.LogoutView`.
+
+* The ``renderer`` argument is added to the :meth:`Widget.render()
+  <django.forms.Widget.render>` method. Methods that don't accept that argument
+  will work through a deprecation period.

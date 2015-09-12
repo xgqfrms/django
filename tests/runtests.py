@@ -63,6 +63,7 @@ ALWAYS_INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.admin.apps.SimpleAdminConfig',
     'django.contrib.staticfiles',
+    'django.forms',
 ]
 
 ALWAYS_MIDDLEWARE = [
@@ -167,6 +168,12 @@ def setup(verbosity, test_labels, parallel):
     warnings.filterwarnings(
         'ignore',
         'The GeoManager class is deprecated.',
+        RemovedInDjango20Warning
+    )
+
+    warnings.filterwarnings(
+        'ignore',
+        'django.forms.extras is deprecated.',
         RemovedInDjango20Warning
     )
 

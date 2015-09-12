@@ -1512,13 +1512,6 @@ class ModelChoiceFieldTests(TestCase):
         with self.assertNumQueries(1):
             template.render(Context({'field': field}))
 
-    def test_modelchoicefield_index_renderer(self):
-        field = forms.ModelChoiceField(Category.objects.all(), widget=forms.RadioSelect)
-        self.assertEqual(
-            str(field.widget.get_renderer('foo', [])[0]),
-            '<label><input name="foo" type="radio" value="" /> ---------</label>'
-        )
-
     def test_modelchoicefield_iterator(self):
         """
         Iterator defaults to ModelChoiceIterator and can be overridden with
@@ -1918,7 +1911,7 @@ class FileAndImageFieldTests(TestCase):
 
         doc = Document.objects.create()
         form = DocumentForm(instance=doc)
-        self.assertEqual(
+        self.assertHTMLEqual(
             str(form['myfile']),
             '<input id="id_myfile" name="myfile" type="file" />'
         )
