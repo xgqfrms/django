@@ -1,5 +1,5 @@
-Django is a high-level Python Web framework that encourages rapid development
-and clean, pragmatic design. Thanks for checking it out.
+Django是一个高级Python Web框架，它鼓励快速发展
+和清洁，务实的设计。谢谢你的检查。
 
 All documentation is in the "docs" directory and online at
 https://docs.djangoproject.com/en/stable/. If you're just getting started,
